@@ -1,0 +1,17 @@
+{
+  "code": "01",
+  "name": "Cuenta de ahorros",
+  "description": "cuenta de ahorros"
+}
+
+{
+  "code": "02",
+  "name": "Targeta de credito personal",
+  "description": "Credito personal "
+}
+
+add driver
+./mvnw quarkus:add-extension -Dextensions="jdbc-postgresql"
+
+docker ps
+docker run --ulimit memlock=-1:-1 -d --name postgres -e POSTGRES_USER=sa -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=product_db -p 5432:5432 postgres:13.3

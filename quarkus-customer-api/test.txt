@@ -1,0 +1,57 @@
+{
+  "code": "001",
+  "accountNumber": "4564564564",
+  "names": "Jonas de los angeles",
+  "phoneNumber": "992272737",
+  "address": "calle 45",
+  "email": "jonas@gmail.com",
+  "products": [
+    {
+      "product": 1
+    },
+    {
+       "product": 2
+    }
+  ]
+}
+
+add driver
+./mvnw quarkus:add-extension -Dextensions="jdbc-postgresql"
+
+graphQL
+query getCustomers{
+  allCustomers{
+    id,
+    names,
+    phone,
+    products{
+      id,
+      description
+    }
+  }
+}
+
+add
+mutation creationCustomer{
+  addCustomerMutation(customer:{
+    accountNumber:"5767576",
+    address:"jr echenique ",
+    code:"003",
+    products:[
+      {
+        product:1
+      },
+      {
+        product:2
+      }
+    ]
+  }) {
+    id
+  }
+}
+
+
+delete
+mutation deleteCustomer{
+  deleteCustomer(id:101)
+}
