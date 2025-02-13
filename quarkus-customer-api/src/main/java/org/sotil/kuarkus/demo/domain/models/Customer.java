@@ -12,16 +12,16 @@ import java.util.List;
 
 @Entity
 @Data
-public class Customer  extends PanacheEntity {
+public class Customer extends PanacheEntity {
 
-    private String code;
-    private String accountNumber;
-    private String names;
-    private String surname;
-    private String phone;
-    private String address;
-    @OneToMany(mappedBy = "customer",cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
-    @JsonManagedReference
-    private List<Product> products;
+  private String code;
+  private String accountNumber;
+  private String names;
+  private String surname;
+  private String phone;
+  private String address;
+  @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+  @JsonManagedReference
+  private List<Product> products;
 
 }

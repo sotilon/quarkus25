@@ -1,0 +1,15 @@
+Stork: descubre servicios fácilmente y selecciona el mejor
+https://www.youtube.com/watch?v=IrHnt4GGgCk
+https://www.youtube.com/watch?v=VLkSUV7Wnw0
+https://github.com/aureamunoz/stork-guitar-hero-demo/
+
+with spring boot
+https://www.youtube.com/watch?v=WVTiwPNaO-Y
+https://github.com/codepeekers/service-discovery-using-consul
+
+with spring
+https://www.youtube.com/watch?v=Dd9-UxrNiD0
+https://github.com/Java-Techie-jt/cloud-consul-service-discovery
+
+k8 consul
+https://youtu.be/uzS-8ISHr3c

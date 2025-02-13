@@ -1,0 +1,15 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+
+[*.{java,xml}]
+indent_style = space
+indent_size = 2
+
+[*.{jsp,html,js,yml,yaml}]
+indent_style = space
+indent_size = 2

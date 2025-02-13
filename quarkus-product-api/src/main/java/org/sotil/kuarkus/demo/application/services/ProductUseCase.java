@@ -12,36 +12,36 @@ import java.util.Optional;
 @ApplicationScoped
 public class ProductUseCase implements ProductInputPort {
 
-    @Inject
-    ProductOutputPort productOutputPort;
+  @Inject
+  ProductOutputPort productOutputPort;
 
-    @Override
-    public List<Product> list() {
-        return productOutputPort.findAll();
-    }
+  @Override
+  public List<Product> list() {
+    return productOutputPort.findAll();
+  }
 
-    @Override
-    public Optional<Product> getById(Long id) {
-        return productOutputPort.findById(id);
-    }
+  @Override
+  public Optional<Product> getById(Long id) {
+    return productOutputPort.findById(id);
+  }
 
-    @Override
-    public Product add(Product p) {
-        return productOutputPort.save(p);
-    }
+  @Override
+  public Product add(Product p) {
+    return productOutputPort.save(p);
+  }
 
-    @Override
-    public Boolean delete(Long id) {
-        Product p = productOutputPort.getById(id);
-        if(p==null){
-            return false;
-        }
-        productOutputPort.delete(p);
-        return true;
+  @Override
+  public Boolean delete(Long id) {
+    Product p = productOutputPort.getById(id);
+    if (p == null) {
+      return false;
     }
+    productOutputPort.delete(p);
+    return true;
+  }
 
-    @Override
-    public Product update(Product p) {
-        return productOutputPort.save(p);
-    }
+  @Override
+  public Product update(Product p) {
+    return productOutputPort.save(p);
+  }
 }

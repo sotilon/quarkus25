@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductGraphQLClientPort {
 
-    List<Product> getProductsGrapQl() throws Exception ;
+  List<Product> getProductsGrapQl() throws Exception;
 
-    Product getByIdProductGrapQl(Long Id) throws Exception ;
+  Product getByIdProductGrapQl(Long Id) throws Exception;
 }

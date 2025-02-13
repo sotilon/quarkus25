@@ -55,3 +55,17 @@ delete
 mutation deleteCustomer{
   deleteCustomer(id:101)
 }
+
+
+prueba
+
+curl --request PUT --data '{
+  "quarkus.datasource.jdbc.url": "postgresql://localhost:5432/customer_db",
+  "quarkus.datasource.username": "sa",
+  "quarkus.datasource.password": "admin",
+  "quarkus.datasource.db-kind": "postgresql"
+}' http://localhost:8500/v1/kv/config/database
+
+
+ curl --request GET http://localhost:8500/v1/health/service/ms-quarkus-customer-api
+  curl --request PUT http://localhost:8500/v1/agent/service/deregister/ms-quarkus-customer-api-8500

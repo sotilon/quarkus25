@@ -9,24 +9,24 @@ import lombok.Data;
 @Entity
 @Data
 @Table(
-        uniqueConstraints=
-        @UniqueConstraint(columnNames={"customer", "product"})
+  uniqueConstraints =
+  @UniqueConstraint(columnNames = {"customer", "product"})
 )
 public class Product extends PanacheEntity {
 
-    @ManyToOne
-    @JoinColumn(name = "customer", referencedColumnName = "id")
-    @JsonBackReference
-    private Customer customer;
-    @Column
-    private Long product;
+  @ManyToOne
+  @JoinColumn(name = "customer", referencedColumnName = "id")
+  @JsonBackReference
+  private Customer customer;
+  @Column
+  private Long product;
 
-    @Transient
-    private Long id;
-    @Transient
-    private String name;
-    @Transient
-    private String code;
-    @Transient
-    private String description;
+  @Transient
+  private Long id;
+  @Transient
+  private String name;
+  @Transient
+  private String code;
+  @Transient
+  private String description;
 }
