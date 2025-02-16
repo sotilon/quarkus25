@@ -26,14 +26,4 @@ public class CustomerGraphQLResource {
     return customerServicePort.getById(id);
   }
 
-  @Mutation
-  public Uni<Customer> addCustomerMutation(Customer customer) {
-    return customerServicePort.add(customer);
-  }
-
-  @Mutation
-  public Uni<Boolean> deleteCustomer(Long id) {
-    return customerServicePort.delete(id);
-  }
-
 }

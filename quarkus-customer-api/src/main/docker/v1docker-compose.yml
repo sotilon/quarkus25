@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: postgres_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=sa
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=customer_db
+    networks:
+      - kong-net
+
+  quarkus-app:
+    image: quarkus/ms-quarkus-customer-api-jvm:latest
+    container_name: ms-quarkus-customer-api
+    depends_on:
+      - postgres
+    environment:
+      - BD_HOST=jdbc:postgresql://postgres_db:5432/customer_db
+      - BD_USERNAME=sa
+      - DB_PASSWORD=admin
+      - CLIENT_HOST_PRODUCT=http://ms-quarkus-product-api
+      - CLIENT_HOST_PRODUCT_GQL=http://ms-quarkus-product-api:8081/graphql
+    ports:
+      - "8082:8082"
+    networks:
+      - kong-net
+
+networks:
+  kong-net:
+    name: kong-net
+    driver: bridge
+
+volumes:
+  postgres_data:

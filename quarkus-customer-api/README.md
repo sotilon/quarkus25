@@ -55,3 +55,6 @@ If you want to learn more about building native executables, please consult http
 This example demonstrate RESTEasy JSON serialisation by letting you list, add and remove quark types from a list. Quarked!
 
 [Related guide section...](https://quarkus.io/guides/rest-json#creating-your-first-json-rest-service)
+
+Instalación de API Gateway de Kong con Docker
+https://www.youtube.com/watch?v=sJEID1xEZMg

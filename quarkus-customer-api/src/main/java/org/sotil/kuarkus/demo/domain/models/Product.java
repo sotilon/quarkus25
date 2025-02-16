@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Table(
   uniqueConstraints =
   @UniqueConstraint(columnNames = {"customer", "product"})

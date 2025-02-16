@@ -1,0 +1,29 @@
+POST http://localhost:8081/admin/api/v1/add
+Content-Type:application/json
+{
+  "code": "01",
+  "name": "Cuenta de ahorros",
+  "description": "cuenta de ahorros"
+}
+
+# second product
+POST http://localhost:8081/admin/api/v1/add
+Content-Type:application/json
+{
+  "code": "02",
+  "name": "Targeta de credito personal",
+  "description": "Credito personal "
+}
+
+#delete product by id
+
+DELETE http://localhost:8081/admin/api/v1/delete/52
+
+#update product by id
+PUT http://localhost:8081/admin/api/v1/update
+  {
+    "id": 2,
+    "code": "02",
+    "name": "Targeta de credito personal",
+    "description": "Credito personal actualizado "
+  }
