@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.sotil.kuarkus.demo.application.port.in.ProductInputPort;
+import org.sotil.kuarkus.demo.domain.exceptions.ProductException;
 import org.sotil.kuarkus.demo.domain.models.Product;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
@@ -29,7 +30,9 @@ public class ProductApiResource {
   @Path("/products")
   public List<Product> list() {
     log.info("Getting all products");
-    return productInputPort.list();
+    return Optional.ofNullable(productInputPort.list())
+      .filter(products -> !products.isEmpty())
+      .orElseThrow(() -> new ProductException("No products found in the database", Response.Status.NOT_FOUND.getStatusCode()));
   }
 
   @GET
@@ -41,9 +44,11 @@ public class ProductApiResource {
 
   @GET
   @Path("/find/{productId}")
-  public Optional<Product> getById(@PathParam("productId") Long productId) {
+  public Product getById(@PathParam("productId") Long productId) {
     log.info("Getting product by id :: {}", productId);
-    return productInputPort.getById(productId);
+    return Optional.ofNullable(productInputPort.getById(productId))
+      .flatMap(product -> product) // Unwraps the Optional if not null
+      .orElseThrow(() -> new ProductException("Product not found for ID: " + productId, Response.Status.NOT_FOUND.getStatusCode()));
   }
 
 }

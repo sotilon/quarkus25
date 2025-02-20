@@ -35,3 +35,12 @@ docker exec -it postgres_db psql -U sa -d postgres -c "CREATE DATABASE product_d
 docker-compose restart
 
 docker logs -f ms-quarkus-product-api --tail
+
+i % curl -s "https://get.sdkman.io" | bash
+
+
+
+
+
+
+

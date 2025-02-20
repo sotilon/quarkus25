@@ -1,0 +1,2 @@
+docker logs ms-quarkus-security-api
+

@@ -38,12 +38,12 @@ Content-Type:application/json
 
 #delete product by id
 
-DELETE http://localhost:8082/admin/api/v1/delete/52
+DELETE http://localhost:8082/admin/api/v1/delete/3
 
 #update product by id
 PUT http://localhost:8082/admin/api/v1/update
   {
-    "id": 2,
+    "id": 3,
     "code": "02",
     "name": "Targeta de credito personal",
     "description": "Credito personal actualizado "

@@ -1,0 +1,23 @@
+services:
+  consul:
+    image: consul:1.15.4
+    container_name: consul-bank-abc  # Custom container name
+    restart: always
+    networks:
+      - kong-net  # Attach to the custom network
+    ports:
+      - "8500:8500"   # Consul UI and API
+      - "8600:8600/udp" # DNS service
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0
+    command: "agent -server -bootstrap -ui -client=0.0.0.0"
+    volumes:
+      - consul_data:/consul/data
+
+volumes:
+  consul_data:
+    driver: local
+
+networks:
+  kong-net:
+    external: true

@@ -1,0 +1,6 @@
+ ./mvnw package
+
+docker build -f src/main/docker/Dockerfile.jvm -t quarkus/ms-quarkus-product-api-jvm .
+docker-compose -f src/main/docker/docker-compose.yml down
+docker-compose -f src/main/docker/docker-compose.yml up -d
+docker-compose -f src/main/docker/docker-compose.yml up -d --build

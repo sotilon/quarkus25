@@ -1,0 +1,29 @@
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=--enable-preview
+    ports:
+      - "9200:9200"
+    networks:
+      - kong-net
+
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    restart: always
+    environment:
+      - STORAGE_TYPE=elasticsearch
+      - ES_HOSTS=http://elasticsearch:9200
+    ports:
+      - "9411:9411"
+    depends_on:
+      - elasticsearch
+    networks:
+      - kong-net
+
+networks:
+  kong-net:
+    external: true

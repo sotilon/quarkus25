@@ -1,4 +1,0 @@
-GET http://localhost:8083/api/v1/products
-
-GET http://localhost:8083/api/v1/find/2
-

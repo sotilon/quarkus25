@@ -1,0 +1,23 @@
+services:
+  customer-database-postgres:
+    image: postgres:14-alpine
+    container_name: customer-database-postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=sa
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=customer_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - kong-net
+
+volumes:
+  postgres_data:
+    name: customer_postgres_data
+
+networks:
+  kong-net:
+    external: true

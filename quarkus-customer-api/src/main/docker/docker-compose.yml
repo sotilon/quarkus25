@@ -22,8 +22,10 @@ services:
       - POSTGRES_URL=postgresql://customer-database-postgres:5432/customer_db
       - POSTGRES_USER=sa
       - POSTGRES_PASSWORD=admin
-      - CLIENT_HOST_PRODUCT=http://ms-quarkus-product-api
+      - CLIENT_HOST_PRODUCT=ms-quarkus-product-api
       - CLIENT_HOST_PRODUCT_GQL=http://ms-quarkus-product-api:8081/graphql
+      - SERVICE_ADDRESS_CONSUL=consul-bank-abc
+      - SERVICE_ADDRESS_NAME=ms-quarkus-customer-api
     ports:
       - "8082:8082"
     networks:

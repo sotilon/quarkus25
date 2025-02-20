@@ -2,6 +2,7 @@ package org.sotil.kuarkus.demo.application.ports.out;
 
 import io.smallrye.mutiny.Uni;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
@@ -20,6 +21,6 @@ public interface ProductBackUpApiClientStorkFallBackPort {
 
   @GET
   @Path("/products")
-  Uni<List<ProductData>> getAllProducts();
+  Uni<List<ProductData>> getAllProducts(@HeaderParam("Authorization") String authHeader);
 
 }

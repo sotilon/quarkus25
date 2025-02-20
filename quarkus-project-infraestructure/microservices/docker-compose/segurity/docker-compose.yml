@@ -1,0 +1,18 @@
+services:
+  security-app:
+    image: quarkus/ms-quarkus-security-api-jvm:latest
+    container_name: ms-quarkus-security-api
+    environment:
+      - MYSQL_URL=jdbc:mysql://mysql_security:3306/security_token
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=admin
+      - SERVICE_ADDRESS_CONSUL=consul-bank-abc
+      - SERVICE_ADDRESS=ms-quarkus-security-api
+    ports:
+      - "8084:8084"
+    networks:
+      - kong-net
+
+networks:
+  kong-net:
+    external: true

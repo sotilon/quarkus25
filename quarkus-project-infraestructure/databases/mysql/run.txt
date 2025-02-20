@@ -1,0 +1,2 @@
+docker logs mysql_security
+docker exec -it security_token psql -U sa -d product_db

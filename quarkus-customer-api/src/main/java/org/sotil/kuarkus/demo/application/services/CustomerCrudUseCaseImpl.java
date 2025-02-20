@@ -31,7 +31,7 @@ public class CustomerCrudUseCaseImpl implements CustomerCrudServicePort {
   @Override
   public Uni<List<Customer>> listCustomers() {
     //return Customer.listAll(Sort.by("names"));
-    log.info("find listCustomers");
+    log.info("find Customers from database");
     customerOutputPort.findTestRepo();
     return customerOutputPort.listAll();
   }

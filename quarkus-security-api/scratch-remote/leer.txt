@@ -1,0 +1,9 @@
+https://github.com/gscaramuzzino/quarkus-jwt-auth
+https://www.youtube.com/watch?v=0FVJlSJR0Zo
+
+decode
+https://www.jstoolset.com/jwt
+https://mockoon.com/tools/jwt-decode/
+
+code
+https://bcrypt-generator.com

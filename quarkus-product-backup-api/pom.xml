@@ -113,6 +113,10 @@
             <artifactId>smallrye-mutiny-vertx-consul-client</artifactId>
         </dependency>
 
+      <dependency>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-smallrye-jwt</artifactId>
+      </dependency>
 
     </dependencies>
 

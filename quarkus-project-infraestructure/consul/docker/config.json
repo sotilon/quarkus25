@@ -1,0 +1,6 @@
+{
+  "config/db/host": "localhost",
+  "config/db/port": "5432",
+  "config/db/user": "admin",
+  "config/db/password": "securepassword"
+}
