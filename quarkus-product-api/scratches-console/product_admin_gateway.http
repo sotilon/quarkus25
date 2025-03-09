@@ -1,0 +1,39 @@
+POST http://localhost:8081/admin/api/v1/add
+Content-Type:application/json
+{
+  "code": "01",
+  "name": "Cuenta de ahorros",
+  "description": "cuenta de ahorros"
+}
+
+# second product
+POST http://localhost:8081/admin/api/v1/add
+Content-Type:application/json
+{
+  "code": "02",
+  "name": "Targeta de credito personal",
+  "description": "Credito personal "
+}
+
+#delete product by id (vendor , cutomer)
+#403 forbidden
+DELETE http://localhost:8081/admin/api/v1/delete/52
+accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3F1YXJrdXMuaW8vaXNzdWVyIiwidXBuIjoiVkVORE9SIiwiZ3JvdXBzIjpbIkNVU1RPTUVSIl0sImlhdCI6MTczOTg1NTM2MiwiZXhwIjoxNzM5ODU4OTYyLCJqdGkiOiIwYTVmMGUzNy0wZjkyLTQ5ZDktODQ1NC0yN2Q3OTMyNzRhZTUifQ.Guh9db6XyUnfQZy1FCMfLRt30sECT2jB1rbW9xp1ls6kT2RfuVKOvWTpnCXQuv3MPcSIZhQTKmINsh_A_nY5cdKHLuvZliv_9TCa61I2mNbuTEPMqqX8SQMHEymtUzn1BmnWG3bjGppjiWXgD-rJ89U-lDEgFQfaWdZYtMv-Y8BN0KJnUzyYYwdWHaHR0PbSTwz4OSYX-6W7kPXXo3C96wZR_WkZ1ME_u2jxQjOMcM1gqKuKMxlzkE5iNlptNy9GeQcFxDISX_qC1V7ItiPHvAdugDzDQxcKnZ09Vy6pJK9eCJTn-c2S7D5oWoHEaehU_6k6E7_k-4UbtohpjF93sw
+
+#401 not content
+DELETE http://localhost:8081/admin/api/v1/delete/101
+accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3F1YXJrdXMuaW8vaXNzdWVyIiwidXBuIjoiQURNSU4iLCJncm91cHMiOlsiTUFOQUdFUiIsIkNVU1RPTUVSIl0sImlhdCI6MTczOTg1NjIzNCwiZXhwIjoxNzM5ODU5ODM0LCJqdGkiOiI5MTg3YWFlMi05Y2M3LTRhMzYtYTRkMS0xZWUwYTI2ZjBhOWIifQ.gZPaQGqSjdGhn1oJwkbjohCbllCCiaEBRRzh_bOo43QAqPz-MsnZPRnsS5S5miOJbpEPadeG0h5bCxX-j6vEmb40kT13NGbxvXwYr7Lx7qVEAEoGFR-mBWeQgOM5asS9DilGZJHXHD7bmkhrNPgsdKs-zuXOXnatFxFHKposCdmoMltRGXMkYBe8sBIOK_3DTjtqUehDHYPnqrX7yFZmydBFX_Ajyyj-IyLVTpwV-_m3LhdUvO6cu8wKc1DcfHlZpmZ0ka9NO6LUEyfhcv7XQk8SFi9wVyXJn-644wX92T_E7UBVqio5Vwnkq6vsbASoDww5uZ3H9gFxwa0gH1xF9g
+
+
+#update product by id
+PUT http://localhost:8081/admin/api/v1/update
+accept: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3F1YXJrdXMuaW8vaXNzdWVyIiwidXBuIjoiVkVORE9SIiwiZ3JvdXBzIjpbIkNVU1RPTUVSIl0sImlhdCI6MTczOTg1NTM2MiwiZXhwIjoxNzM5ODU4OTYyLCJqdGkiOiIwYTVmMGUzNy0wZjkyLTQ5ZDktODQ1NC0yN2Q3OTMyNzRhZTUifQ.Guh9db6XyUnfQZy1FCMfLRt30sECT2jB1rbW9xp1ls6kT2RfuVKOvWTpnCXQuv3MPcSIZhQTKmINsh_A_nY5cdKHLuvZliv_9TCa61I2mNbuTEPMqqX8SQMHEymtUzn1BmnWG3bjGppjiWXgD-rJ89U-lDEgFQfaWdZYtMv-Y8BN0KJnUzyYYwdWHaHR0PbSTwz4OSYX-6W7kPXXo3C96wZR_WkZ1ME_u2jxQjOMcM1gqKuKMxlzkE5iNlptNy9GeQcFxDISX_qC1V7ItiPHvAdugDzDQxcKnZ09Vy6pJK9eCJTn-c2S7D5oWoHEaehU_6k6E7_k-4UbtohpjF93sw
+  {
+    "id": 1,
+    "code": "02",
+    "name": "Targeta de credito personal",
+    "description": "Credito personal actualizado "
+  }

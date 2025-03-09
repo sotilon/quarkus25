@@ -1,0 +1,29 @@
+zsh: permission denied: ./dockerdown.sh
+
+chmod +x dockerdown.sh
+
+docker network inspect kong-net
+
+GET http://localhost:8001/services
+GET http://localhost:8001/routes
+
+consul check
+curl -i -X GET http://localhost:8500/v1/catalog/services
+curl -s http://localhost:8500/v1/catalog/services | jq .
+curl -i -X GET http://localhost:8500/v1/health/service/service-1
+
+check kong
+GET http://localhost:8001/services
+GET http://localhost:8001/routes
+curl -i -X GET http://localhost:8001/services
+curl -i -X GET http://localhost:8001/routes
+
+curl -s http://localhost:8001/services | jq .
+curl -s http://localhost:8001/routes | jq .
+
+volumes
+✅ docker volume ls lists all volumes.
+✅ docker volume inspect <name> shows details.
+✅ docker volume rm <name> deletes a volume.
+✅ docker volume prune removes unused volumes.
+
