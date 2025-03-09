@@ -16,11 +16,12 @@ Content-Type:application/json
     }
   ]
 }
+
 # second product
 POST http://localhost:8082/admin/api/v1/add
 Content-Type:application/json
 {
-  "code": "002",
+  "code": "003",
   "accountNumber": "426514265142",
   "names": "Jorge de los angeles",
   "phoneNumber": "992272737",

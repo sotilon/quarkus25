@@ -9,18 +9,7 @@ DELETE http://localhost:8001/services/ffba4bf1-73e2-4f50-88c7-d37423e5b0e8
 DELETE http://localhost:8001/services/get-token
 
 
-#admin
-GET http://localhost:8084/api/v1/user/ADMIN
-
-POST http://localhost:8084/api/v1/admin/login
-Content-Type:application/json
-{
-  "username": "ADMIN",
-  "password": "admin123"
-}
-
-#client
-GET http://localhost:8084/api/v1/user/VENDOR
+#add service
 
 POST http://localhost:8001/services
 Content-Type:application/json

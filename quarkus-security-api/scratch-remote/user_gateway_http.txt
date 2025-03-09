@@ -1,0 +1,13 @@
+#get all username
+GET http://localhost:8000/api/v1/users
+
+#by username
+GET http://localhost:8000/api/v1/user/ADMIN
+
+#get token
+POST http://localhost:8000/api/v1/admin/login
+Content-Type:application/json
+{
+  "username": "ADMIN",
+  "password": "admin123"
+}

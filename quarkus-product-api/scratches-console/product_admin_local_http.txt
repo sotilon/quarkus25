@@ -1,0 +1,39 @@
+POST http://localhost:8081/admin/api/v1/add
+Content-Type:application/json
+{
+  "code": "01",
+  "name": "Cuenta de ahorros",
+  "description": "cuenta de ahorros"
+}
+
+# second product
+POST http://localhost:8081/admin/api/v1/add
+Content-Type:application/json
+{
+  "code": "03",
+  "name": "Targeta de credito personal",
+  "description": "Credito personal 2"
+}
+
+#delete product by id (vendor , cutomer)
+#403 forbidden
+DELETE http://localhost:8081/admin/api/v1/delete/3
+accept: application/json
+Authorization: Bearer
+
+#401 not content
+DELETE http://localhost:8081/admin/api/v1/delete/101
+accept: application/json
+Authorization: Bearer
+
+
+#update product by id
+PUT http://localhost:8081/admin/api/v1/update
+accept: application/json
+Authorization: Bearer
+  {
+    "id": 1,
+    "code": "02",
+    "name": "Targeta de credito personal",
+    "description": "Credito personal actualizado "
+  }
