@@ -1,0 +1,30 @@
+WEB
+http://localhost:8500/
+
+docker-compose  down
+docker-compose  up -d
+docker-compose  up -d --build
+docker ps | grep zipkin
+--inspect
+docker inspect bank-abc-consul | grep IPAddress
+docker log consul-bank-abc
+
+--NETWORK
+docker network ls
+docker network connect kong-net bank-abc-consul
+
+--consul
+curl http://localhost:8500/v1/agent/services | jq
+
+`curl http://localhost:8500/v1/health/service/my-service	jq`
+`curl http://localhost:8500/v1/agent/checks	jq`
+`curl http://localhost:8500/v1/health/state/passing	jq`
+`curl http://localhost:8500/v1/health/state/critical	jq`
+curl -v http://localhost:8081/health	Check the service's own health endpoint.
+`docker exec -it consul curl http://localhost:8500/v1/health/service/my-service	jq`
+
+docker volume ls
+
+
+
+

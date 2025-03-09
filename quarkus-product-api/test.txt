@@ -16,10 +16,31 @@ add driver
 docker ps
 docker run --ulimit memlock=-1:-1 -d --name postgres -e POSTGRES_USER=sa -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=product_db -p 5432:5432 postgres:13.3
 
+https://www.youtube.com/@Pabpereza
 
 consul
 https://www.tutorialspoint.com/consul/consul_quick_guide.htm
 
 $ docker run -p 8400:8400 -p 8500:8500 -p 8600:53/udp -h node1 progrium/consul
 -server -bootstrap
+
+./mvnw package
+ docker-compose -f src/main/docker/docker-compose.yml down
+ docker-compose -f src/main/docker/docker-compose.yml up -d
+ docker build -f src/main/docker/Dockerfile.jvm -t quarkus/ms-quarkus-product-api-jvm .
+
+Caused by: org.hibernate.exception.GenericJDBCException: Unable to open JDBC Connection for DDL execution [FATAL: database "product_db" does not exist] [n/a]
+docker exec -it postgres_db psql -U sa -d postgres -c "\l"
+docker exec -it postgres_db psql -U sa -d postgres -c "CREATE DATABASE product_db;"
+docker-compose restart
+
+docker logs -f ms-quarkus-product-api --tail
+
+i % curl -s "https://get.sdkman.io" | bash
+
+
+
+
+
+
 

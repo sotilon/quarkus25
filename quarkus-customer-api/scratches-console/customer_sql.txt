@@ -1,0 +1,24 @@
+
+     create table TB_CUSTOMER (
+         id bigint not null,
+         accountNumber varchar(255),
+         address varchar(255),
+         code varchar(255),
+         names varchar(255),
+         phone varchar(255),
+         primary key (id)
+     )
+     create table Product (
+         id bigint not null,
+         product_id bigint,
+         customer_id bigint,
+         primary key (id)
+     )
+
+
+create table Product (
+         id bigint not null,
+         product bigint,
+         customer bigint,
+         primary key (id)
+     )

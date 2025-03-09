@@ -1,0 +1,1 @@
+docker run --name consul-quarkuCURS-000274-ARQMSQuarkus -p 8500:8500 consul:1.15.4

@@ -6,18 +6,16 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
-import org.jboss.resteasy.reactive.RestPath;
 import org.sotil.kuarkus.demo.application.ports.in.CustomerCrudServicePort;
 import org.sotil.kuarkus.demo.application.ports.in.CustomerStorkFallClientServicePort;
 import org.sotil.kuarkus.demo.application.ports.in.CustomerVertxClientServicePort;
+import org.sotil.kuarkus.demo.domain.exceptions.CustomerException;
 import org.sotil.kuarkus.demo.domain.models.Customer;
 
 import java.util.List;
 
-import static jakarta.ws.rs.core.Response.Status.*;
-
 @Slf4j
-@Path("/customer")
+@Path("/api/v1")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CustomerApiResource {
@@ -32,63 +30,70 @@ public class CustomerApiResource {
   CustomerVertxClientServicePort customerVertxClientServicePort;
 
   @GET
+  @Path("/customers")
   public Uni<List<Customer>> list() {
-    log.info("Getting all customers reactive ");
-    return customerServicePort.listCustomers();
+    log.info("Getting all customers reactively");
+    return customerServicePort.listCustomers()
+      .onItem().ifNull().failWith(new CustomerException("Customer list is null", Response.Status.NOT_FOUND.getStatusCode()))
+      .onItem().transform(customers -> {
+        if (customers.isEmpty()) {
+          throw new CustomerException("Customer list is empty", Response.Status.NOT_FOUND.getStatusCode());
+        }
+        return customers;
+      })
+      .onFailure().invoke(exception -> log.error("ERROR::{}", exception.getMessage()));
   }
 
   @GET
-  @Path("/{Id}")
+  @Path("/customer/{Id}")
   public Uni<Customer> getById(@PathParam("Id") Long Id) {
     log.info("Getting customer by id ::{}", Id);
-    return customerServicePort.getById(Id);
-  }
-
-  @POST
-  public Uni<Response> add(Customer c) {
-    log.info("Saving Customer ::{}", c);
-    return customerServicePort.add(c)
-      .replaceWith(Response.ok(c).status(CREATED)::build);
-  }
-
-  @DELETE
-  @Path("/{Id}")
-  public Uni<Response> delete(@PathParam("Id") Long id) {
-    log.info("deleting by id :: {}", id);
-    return customerServicePort.delete(id)
-      .map(deleted -> deleted
-        ? Response.ok().status(NO_CONTENT).build()
-        : Response.ok().status(NOT_FOUND).build());
-  }
-
-  @PUT
-  @Path("{id}")
-  public Uni<Response> update(@RestPath Long id, Customer c) {
-    log.info("Updating customer id ::{}", id);
-    return customerServicePort.update(id, c)
-      .onItem().ifNotNull().transform(entity -> Response.ok(entity).build())
-      .onItem().ifNull().continueWith(Response.ok().status(NOT_FOUND)::build);
+    return customerServicePort.getById(Id)
+      .onItem().ifNull().failWith(new CustomerException("Customer not found for ID: " + Id, Response.Status.NOT_FOUND.getStatusCode()))
+      .onItem().transform(customer -> {
+        if (customer.id == null) { // Assuming ID should always be present
+          throw new CustomerException("Customer not found for ID: " + Id, Response.Status.NOT_FOUND.getStatusCode());
+        }
+        return customer;
+      })
+      .onFailure().invoke(exception -> log.error("ERROR:: {}", exception.getMessage()));
   }
 
   @GET
-  @Path("/{Id}/product")
+  @Path("/customer/{Id}/product")
   public Uni<Customer> getByIdProduct(@PathParam("Id") Long id) {
-    log.info("Getting Product by id using Reactivo id :: {}", id);
-    return customerVertxClientServicePort.getByIdProduct(id);
+    log.info("Getting Customer by id using Reactivo id :: {}", id);
+    return customerVertxClientServicePort.getByIdProduct(id)
+      .onItem().ifNull().failWith(new CustomerException("Customer not found for ID: " + id, Response.Status.NOT_FOUND.getStatusCode()))
+      .onItem().transform(customer -> {
+        if (customer.id == null) { // Assuming ID should always be present
+          throw new CustomerException("Customer not found for ID: " + id, Response.Status.NOT_FOUND.getStatusCode());
+        }
+        return customer;
+      })
+      .onFailure().invoke(exception -> log.error("ERROR:: {}", exception.getMessage()));
   }
 
   @GET
-  @Path("findCustomerById/{customerId}")
+  @Path("/customer/findById/{customerId}")
   public Uni<Customer> findDetailProductByCustomerId(@PathParam("customerId") Long customerId) {
-    log.info("Getting Product detail by customer id using client :: {}", customerId);
+    log.info("Getting Product detail fill by customer id using client :: {}", customerId);
     return customerStorkClientServicePort.listUsingRepository(customerId);
   }
 
   @GET
-  @Path("findProductFillByCustomerId/{customerId}")
+  @Path("/customer/findProductFillByCustomerId/{customerId}")
   public Uni<Customer> findProductFillByCustomerId(@PathParam("customerId") Long customerId) {
     log.info("Getting Product detail by customer id using client :: {}", customerId);
-    return customerStorkClientServicePort.findCustomerWithProductFill(customerId);
+    return customerStorkClientServicePort.findCustomerWithProductFill(customerId)
+      .onItem().ifNull().failWith(new CustomerException("No Customer details found for customer ID: " + customerId, Response.Status.NOT_FOUND.getStatusCode()))
+      .onItem().transform(customer -> {
+        if (customer.id == null) { // Assuming ID should always be present
+          throw new CustomerException("No product details found for customer ID: " + customerId, Response.Status.NOT_FOUND.getStatusCode());
+        }
+        return customer;
+      })
+      .onFailure().invoke(exception -> log.error("ERROR:: {}", exception.getMessage()));
   }
 
 }

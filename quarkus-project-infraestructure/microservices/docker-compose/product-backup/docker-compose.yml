@@ -1,0 +1,21 @@
+services:
+  product-backend-app:
+    image: quarkus/ms-quarkus-product-backup-api-jvm:latest
+    container_name: ms-quarkus-product-backup-api
+    environment:
+      - POSTGRES_URL=jdbc:postgresql://product-database-postgres:5432/product_db
+      - POSTGRES_USER=sa
+      - POSTGRES_PASSWORD=admin
+      - SERVICE_ADDRESS_CONSUL=consul-bank-abc
+      - SERVICE_ADDRESS_NAME=ms-quarkus-product-backup-api
+    ports:
+      - "8083:8083"
+    networks:
+      - kong-net
+
+networks:
+  kong-net:
+    external: true
+
+volumes:
+  postgres_data:

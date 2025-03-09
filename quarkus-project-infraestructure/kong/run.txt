@@ -1,0 +1,18 @@
+console web
+http://localhost:8002
+
+
+docker-compose  down
+docker-compose  up -d
+docker-compose  up -d --build
+
+curl -i http://localhost:8001
+
+http://localhost:8002/services
+
+Kong Database (PostgreSQL)
+Kong Migrations
+Kong Gateway
+Konga (Optional UI for Kong Management)
+
+

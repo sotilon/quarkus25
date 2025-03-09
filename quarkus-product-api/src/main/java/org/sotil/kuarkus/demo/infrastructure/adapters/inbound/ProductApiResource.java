@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.sotil.kuarkus.demo.application.port.in.ProductInputPort;
+import org.sotil.kuarkus.demo.domain.exceptions.ProductException;
 import org.sotil.kuarkus.demo.domain.models.Product;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 @Slf4j
 @OpenAPIDefinition(info = @Info(title = "Product API", version = "1.0"))
-@Path("/product")
+@Path("/api/v1")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ProductApiResource {
@@ -26,9 +27,12 @@ public class ProductApiResource {
   ProductInputPort productInputPort;
 
   @GET
+  @Path("/products")
   public List<Product> list() {
     log.info("Getting all products");
-    return productInputPort.list();
+    return Optional.ofNullable(productInputPort.list())
+      .filter(products -> !products.isEmpty())
+      .orElseThrow(() -> new ProductException("No products found in the database", Response.Status.NOT_FOUND.getStatusCode()));
   }
 
   @GET
@@ -40,40 +44,11 @@ public class ProductApiResource {
 
   @GET
   @Path("/find/{productId}")
-  public Optional<Product> getById(@PathParam("productId") Long productId) {
+  public Product getById(@PathParam("productId") Long productId) {
     log.info("Getting product by id :: {}", productId);
-    return productInputPort.getById(productId);
+    return Optional.ofNullable(productInputPort.getById(productId))
+      .flatMap(product -> product) // Unwraps the Optional if not null
+      .orElseThrow(() -> new ProductException("Product not found for ID: " + productId, Response.Status.NOT_FOUND.getStatusCode()));
   }
-
-  @POST
-  public Response add(Product p) {
-    log.info("Adding new product :: {}", p);
-    productInputPort.add(p);
-    return Response.ok().build();
-  }
-
-  @DELETE
-  @Path("/{id}")
-  public Response delete(@PathParam("id") Long id) {
-    log.info("Deleting product by id :: {}", id);
-    productInputPort.delete(id);
-    return Response.ok().build();
-  }
-
-  @PUT
-  public Response update(Product p) {
-    log.info("Updating product:: {}", p);
-    Optional<Product> productdb = productInputPort.getById(p.getId());
-    if (productdb.isPresent()) {
-      Product product = productdb.get();
-      product.setCode(p.getCode());
-      product.setName(p.getName());
-      product.setDescription(p.getDescription());
-      productInputPort.update(product);
-      return Response.ok().build();
-    }
-    return Response.status(Response.Status.NOT_FOUND).build();
-  }
-
 
 }

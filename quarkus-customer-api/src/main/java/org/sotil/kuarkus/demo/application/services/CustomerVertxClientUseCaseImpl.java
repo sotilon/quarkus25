@@ -22,6 +22,13 @@ import org.sotil.kuarkus.demo.domain.models.Product;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *No tiene descubrimiento de servicios, requiere URLs fijas.
+ * ✅ Asíncrono y no bloqueante → Ideal para aplicaciones de alto rendimiento.
+ * ✅ Escalabilidad → Maneja miles de solicitudes concurrentes sin bloquear hilos.
+ * ✅ Integración con múltiples servicios → HTTP, bases de datos, Kafka, Redis, etc.
+ * ✅ Modelo reactivo → Compatible con RxJava, Mutiny y programación funcional.
+ */
 @Slf4j
 @ApplicationScoped
 public class CustomerVertxClientUseCaseImpl implements CustomerVertxClientServicePort {
@@ -74,6 +81,7 @@ public class CustomerVertxClientUseCaseImpl implements CustomerVertxClientServic
 
 
   private Uni<List<Product>> getAllProducts() {
+    log.info("productHost::{}, productPort::{} ,productPath::{}",productHost, productPort,productPath);
     return webClient.get(productPort, productHost, productPath).send()
       .onFailure().invoke(res -> log.error("Error recuperando productos ", res))
       .onItem().transform(res -> {

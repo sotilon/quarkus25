@@ -1,0 +1,5 @@
+ docker compose -f docker-compose.yml up -d --build
+KONG_DATABASE=postgres docker compose --profile database up -d
+
+web
+http://localhost:8002/routes

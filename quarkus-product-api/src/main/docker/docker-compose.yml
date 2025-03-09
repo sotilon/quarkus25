@@ -1,0 +1,38 @@
+services:
+  product-database-postgres:
+    image: postgres:14-alpine
+    container_name: product-database-postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=sa
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=product_db
+    networks:
+      - kong-net
+
+  product-app:
+    image: quarkus/ms-quarkus-product-api-jvm:latest
+    container_name: ms-quarkus-product-api
+    depends_on:
+      - product-database-postgres
+    environment:
+      - POSTGRES_URL=jdbc:postgresql://product-database-postgres:5432/product_db
+      - POSTGRES_USER=sa
+      - POSTGRES_PASSWORD=admin
+      - SERVICE_ADDRESS_CONSUL=consul-bank-abc
+      - SERVICE_ADDRESS_NAME=ms-quarkus-product-api
+    ports:
+      - "8081:8081"
+    networks:
+      - kong-net
+
+networks:
+  kong-net:
+    external: true
+
+volumes:
+  postgres_data:
+    name: product_postgres_data

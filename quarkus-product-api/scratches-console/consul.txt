@@ -1,0 +1,9 @@
+curl -X PUT http://localhost:8500/v1/agent/service/deregister/ms-quarkus-product-backup-api-8083
+curl -X PUT http://localhost:8500/v1/agent/service/deregister/ms-quarkus-product-api-8081
+curl -X PUT http://localhost:8500/v1/agent/service/deregister/ms-quarkus-customer-api-8082
+
+curl -X PUT http://localhost:8500/v1/agent/service/deregister/ms-gestion-mascotas-8500
+curl -X PUT http://localhost:8500/v1/agent/service/deregister/ms-gestion-clientes-8500
+
+curl http://localhost:8500/v1/agent/services | jq
+

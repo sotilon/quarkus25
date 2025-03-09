@@ -69,3 +69,38 @@ curl --request PUT --data '{
 
  curl --request GET http://localhost:8500/v1/health/service/ms-quarkus-customer-api
   curl --request PUT http://localhost:8500/v1/agent/service/deregister/ms-quarkus-customer-api-8500
+
+
+
+  docker network create kong-net
+
+docker compose
+https://www.youtube.com/watch?v=U-2Sdbs_eWQ
+https://github.com/tuxtor/docker-java-samples/blob/main/quarkus-demo/src/main/docker/docker-compose.yml
+
+Solución:
+
+-- 1. Revocar privilegios de todas las BD del rol/grupo publico
+revoke all privileges on database db_basex from public;
+De esta forma se limita el acceso a cualquier usuario que no sea "postgres"
+
+-- 2. Crear usuario/rol [se pueden agregar roles segun se considere necesario]
+create user user_test with password 'user_test';
+
+--3. Crear BD [solo debera acceder el usuario user_test]
+create database db_test;
+
+-- 4. Retirar privilios a usuarios publicos de la BD creada
+revoke all privileges on database db_test from public;
+
+-- 5. Permitir acceso de usuario user_test en la bd:
+grant all privileges on database db_test TO user_test;
+Los únicos que podran acceder a esta bd son usuario: postgres y user_test
+
+https://www.timescale.com/blog/how-to-test-your-postgresql-connection
+jdbc:postgresql://postgres_db:5432/customer_db
+psql -h postgres_db -p 5432 -d customer_db -U sa
+ apk add --no-cache postgresql-client
+
+docker-compose down
+docker-compose up -d

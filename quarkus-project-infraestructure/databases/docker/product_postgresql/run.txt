@@ -1,0 +1,2 @@
+docker logs customer-database-postgres
+docker exec -it product-database-postgres psql -U sa -d product_db

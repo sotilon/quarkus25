@@ -11,18 +11,17 @@ import org.sotil.kuarkus.demo.infrastructure.dto.ProductData;
 
 import java.util.List;
 
-@Path("/product")
+@Path("/api/v1")
 @RegisterRestClient(baseUri = "stork://ms-quarkus-product-api")
 @Produces(MediaType.APPLICATION_JSON)
 public interface ProductApiClientStorkPort {
 
+  @GET
+  @Path("/products")
+  Uni<List<ProductData>> getAllProducts();
 
   @GET
   @Path("/find/{productId}")
   Uni<ProductData> findProductById(@PathParam("productId") Long productId);
-
-  @GET
-  @Path("/findAll")
-  Uni<List<ProductData>> getAllProducts();
 
 }

@@ -1,0 +1,51 @@
+POST http://localhost:8082/admin/api/v1/add
+Content-Type:application/json
+{
+  "code": "001",
+  "accountNumber": "4564564564",
+  "names": "Jonas de los angeles",
+  "phoneNumber": "992272737",
+  "address": "calle 45",
+  "email": "jonas@gmail.com",
+  "products": [
+    {
+      "product": 1
+    },
+    {
+       "product": 2
+    }
+  ]
+}
+
+# second product
+POST http://localhost:8082/admin/api/v1/add
+Content-Type:application/json
+{
+  "code": "003",
+  "accountNumber": "426514265142",
+  "names": "Jorge de los angeles",
+  "phoneNumber": "992272737",
+  "address": "calle 45",
+  "email": "jorge@gmail.com",
+  "products": [
+    {
+      "product": 1
+    },
+    {
+       "product": 2
+    }
+  ]
+}
+
+#delete product by id
+
+DELETE http://localhost:8082/admin/api/v1/delete/3
+
+#update product by id
+PUT http://localhost:8082/admin/api/v1/update
+  {
+    "id": 3,
+    "code": "02",
+    "name": "Targeta de credito personal",
+    "description": "Credito personal actualizado "
+  }

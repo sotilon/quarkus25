@@ -1,0 +1,60 @@
+GET http://localhost:8001/services
+GET http://localhost:8001/routes
+
+#delete routes
+DELETE http://localhost:8001/routes/40ed1368-1117-49b4-8566-558cd0364984
+DELETE http://localhost:8001/routes/get-token-route
+#delete services
+DELETE http://localhost:8001/services/ffba4bf1-73e2-4f50-88c7-d37423e5b0e8
+DELETE http://localhost:8001/services/get-token
+
+#get service api PUT http://localhost:8081/admin/api/v1/update
+
+POST http://localhost:8001/services
+Content-Type:application/json
+{
+	"name": "update-product",
+	"protocol": "http",
+	"host": "ms-quarkus-product-api",
+	"port": 8081,
+	"path": "/admin/api/v1/update",
+	"tags": ["product-service", "product-api"]
+}
+
+#route get users to service
+POST http://localhost:8001/services/update-product/routes
+Content-Type:application/json
+{
+	"name": "update-product-route",
+	"paths": [
+		"/admin/api/v1/update"
+	],
+	"methods": [
+		"PUT"
+	]
+}
+
+# service for get product GET http://localhost:8081/api/v1/products
+POST http://localhost:8001/services
+Content-Type:application/json
+{
+	"name": "get-products",
+	"protocol": "http",
+	"host": "ms-quarkus-product-api",
+	"port": 8081,
+	"path": "/api/v1/products",
+	"tags": ["product-service", "product-api"]
+}
+
+#route get users to service
+POST http://localhost:8001/services/get-products/routes
+Content-Type:application/json
+{
+	"name": "get-products-route",
+	"paths": [
+		"/api/v1/products"
+	],
+	"methods": [
+		"GET"
+	]
+}
